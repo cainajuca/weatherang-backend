@@ -1,46 +1,40 @@
 const express = require('express');
 const router = express.Router();
 
-// posts Model
+// weather's Model
 const Posts = require('../../models/Posts');
 
-// @routes GET api/posts
-// @desc Get All post
 router.get('/', async (req, res) => {
     try {
         const posts = await Posts.find();
-        if(!posts) throw Error('No Items');
+        if(!posts) throw Error('Cannot GET: Histórico vazio.');
         res.status(200).json(posts)
     } catch(err) {
-        res.status(400).json({ msg: err })
+        res.status(400).json({ msg: err.message })
     }
 });
 
-// @routes POST api/posts
-// @desc Create Sn post
 router.post('/', async (req, res) => {
     const newPost = new Posts(req.body);
 
     try {
         const post = await newPost.save();
-        if(!post) throw Error('Someting went wrong while saving the post.')
+        if(!post) throw Error('Erro ao postar weather.')
 
         res.status(200).json(post);
     } catch(err) {
-        res.status(400).json({ msg: err })
+        res.status(400).json({ msg: err.message })
     }
 
 });
 
-// @routes DELETE api/posts
-// @desc Delete all post
 router.delete('/', async (req, res) => {
     try {
         const posts = await Posts.remove();
-        if(!posts) throw Error('No weather found.');
+        if(!posts) throw Error('Cannot DELETE: Histórico vazio.');
         res.status(200).json( { success: true } )
     } catch(err) {
-        res.status(400).json({ msg: err })
+        res.status(400).json({ msg: err.message })
     }
 });
 

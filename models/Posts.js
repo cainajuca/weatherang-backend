@@ -1,19 +1,46 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// change it to weather model !!
 const PostSchema = new Schema({
-    title: {
-        type: String,
-        required: true,
+    error: {
+        type: Number,
+        required: false
     },
-    body: {
+    name: {
         type: String,
         required: true
     },
-    date: {
-        type: Date,
-        default: Date.now
+    region: {
+        type: String,
+        required: true
+    },
+    country: {
+        type: String,
+        required: true
+    },
+    localtime: {
+        type: String,
+        required: true
+    },
+    weather_code: {
+        type: Number,
+        required: true
+    },
+    timezone_id: {
+        type: String,
+        required: true
+    },
+    temperature: {
+        type: Number,
+        required: true
+    },
+    weather_icon: {
+        type: String,
+        required: true
+    },
+    weather_description: {
+        type: String,
+        required: true
     }
 })
 
